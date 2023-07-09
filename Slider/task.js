@@ -13,26 +13,33 @@ function changeSlide(index, slidesArray) {
   dotsArray.forEach((dot) => dot.className = 'slider__dot');
   slidesArray.at(index).classList.add('slider__item_active');
   dotsArray.at(index).classList.add('slider__dot_active');
+  // return index;
+}
+
+function getActiveSlideIndex() {
+  const index = slidesArray.findIndex((slide) => slide.classList.contains('slider__item_active'));
   return index;
 }
 
-let index = 0;
-dotsArray.at(index).classList.add('slider__dot_active');
+// let index = 0;
+dotsArray.at(getActiveSlideIndex()).classList.add('slider__dot_active');
 
 dotsArray.forEach((dot) => {
   dot.onclick = () => {
-    index = dotsArray.indexOf(dot, 0);
+    const index = dotsArray.indexOf(dot, 0);
     changeSlide(index, slidesArray);
   }
 })
 
 
 arrowNext.onclick = () => {
+  let index = getActiveSlideIndex();
   ++index;
-  index = changeSlide(index, slidesArray);
+  changeSlide(index, slidesArray);
 }
 
 arrowPrev.onclick = () => {
+  let index = getActiveSlideIndex();
   --index;
-  index = changeSlide(index, slidesArray);
+  changeSlide(index, slidesArray);
 }
